@@ -36,7 +36,7 @@ setup(name='robotframework_grid_downloader_plugin',
         "Programming Language :: Python :: 3",
         "License :: Apache-2.0",
         "Operating System :: OS Independent",
-    ],
+      ],
       packages=find_packages(),
       package_data={},
       install_requires=[
@@ -45,4 +45,4 @@ setup(name='robotframework_grid_downloader_plugin',
           'requests',
           'certifi'
       ]
-      )
+)
