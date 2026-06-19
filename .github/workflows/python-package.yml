@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   changes:
@@ -159,21 +160,50 @@ jobs:
       - name: Generate Robot Framework libdoc
         run: ./doc/generate-doc.sh
 
-      - name: Commit updated libdoc
-        if: github.event_name != 'pull_request' && github.ref_name != 'main'
+      - name: Commit generated libdoc
+        id: libdoc
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         run: |
           if git diff --quiet -- docs/index.html; then
             echo "docs/index.html is already up to date"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/index.html
           git commit -m "Update generated libdoc [skip ci]"
-          git push origin HEAD:${{ github.ref_name }}
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Push generated libdoc
+        if: steps.libdoc.outputs.changed == 'true' && (github.event_name == 'pull_request' || github.ref_name != 'main')
+        run: git push origin HEAD:${{ github.head_ref || github.ref_name }}
+
+      - name: Open generated libdoc pull request
+        if: steps.libdoc.outputs.changed == 'true' && github.event_name != 'pull_request' && github.ref_name == 'main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          LIBDOC_BRANCH: automation/update-generated-libdoc
+        run: |
+          git push --force-with-lease origin HEAD:${LIBDOC_BRANCH}
+
+          pr_number="$(gh pr list --base main --head "${LIBDOC_BRANCH}" --state open --json number --jq '.[0].number')"
+          if [ -n "${pr_number}" ]; then
+            gh pr edit "${pr_number}" \
+              --title "Update generated libdoc" \
+              --body "Automated update from the Generate libdoc workflow."
+            echo "Updated generated libdoc pull request #${pr_number}"
+          else
+            gh pr create \
+              --base main \
+              --head "${LIBDOC_BRANCH}" \
+              --title "Update generated libdoc" \
+              --body "Automated update from the Generate libdoc workflow."
+          fi
 
       - name: Verify generated libdoc
-        if: github.event_name == 'pull_request' || github.ref_name == 'main'
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository
         run: |
           if git diff --quiet -- docs/index.html; then
             echo "docs/index.html is already up to date"
