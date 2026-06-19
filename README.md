@@ -5,7 +5,7 @@
 # SeleniumLibrary Grid Downloader Plugin
 
 [![Robot Framework](https://img.shields.io/badge/Robot%20Framework-7.4.2%2B-brightgreen)](https://robotframework.org)
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://python.org)
+[![Python](https://img.shields.io/badge/Python-3.11%2B-blue)](https://python.org)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue)](LICENSE)
 
 GridDownloader is a SeleniumLibrary plugin for Robot Framework that retrieves files downloaded by a remote browser running on Selenium Grid.
@@ -14,7 +14,7 @@ It uses Selenium Grid managed downloads and Selenium Python's command executor, 
 
 ## Requirements
 
-- Python 3.10 or newer
+- Python 3.11 or newer
 - Robot Framework 7.4.2 or newer
 - SeleniumLibrary 6.9.0 or newer
 - Selenium 4.29.0 through 4.44.x, matching the SeleniumLibrary 6.9.0 supported range
