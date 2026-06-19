@@ -55,10 +55,10 @@ test = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/robco/robotframework-selenium-downloader-plugin"
-Source = "https://github.com/robco/robotframework-selenium-downloader-plugin"
-Issues = "https://github.com/robco/robotframework-selenium-downloader-plugin/issues"
-Documentation = "https://robco.github.io/robotframework-selenium-downloader-plugin/"
+Homepage = "https://github.com/robco/robotframework-selenium-grid-downloader"
+Source = "https://github.com/robco/robotframework-selenium-grid-downloader"
+Issues = "https://github.com/robco/robotframework-selenium-grid-downloader/issues"
+Documentation = "https://robco.github.io/robotframework-selenium-grid-downloader/"
 
 [tool.setuptools.packages.find]
 include = ["GridDownloader*"]
