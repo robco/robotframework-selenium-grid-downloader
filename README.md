@@ -34,7 +34,7 @@ pip install -U robotframework-selenium-grid-downloader
 
 ## Keywords Documentation
 
-Keywords documentation can be found [here](https://robco.github.io/robotframework-selenium-downloader-plugin/).
+Keywords documentation can be found [here](https://robco.github.io/robotframework-selenium-grid-downloader/).
 
 ## Example Usage
 
