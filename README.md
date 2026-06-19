@@ -1,7 +1,6 @@
 [![Python Package CI](https://github.com/robco/robotframework-selenium-downloader-plugin/actions/workflows/python-package.yml/badge.svg)](https://github.com/robco/robotframework-selenium-downloader-plugin/actions/workflows/python-package.yml)
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/robco)
-[Support via Revolut](https://revolut.me/robco)
 
 # SeleniumLibrary Grid Downloader Plugin
 
